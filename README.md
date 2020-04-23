@@ -1,7 +1,7 @@
 # TicTacToe
 Classic kids game with a board divided into 9 squares placed over 3 rows with 3 squares per row. Each player represents a `O` or `X` on the board. Players take turns to try get 3 in a row vertically, horizontally or diagonally. First person to get 3 in a row wins, if nobody gets 3 in a row and all board squares are populated the game is a draw.
 
-![https://board-games-galore.fandom.com/wiki/Tic-tac-toe](https://vignette.wikia.nocookie.net/board-games-galore/images/4/47/Tictactoe-winning-vector-639732.jpg/revision/latest?cb=20160711013756)
+![https://board-games-galore.fandom.com/wiki/Tic-tac-toe](https://raw.githubusercontent.com/carlpaton/TicTacToe/master/Data/tictactoe.jpg)
 
 ## Game
 

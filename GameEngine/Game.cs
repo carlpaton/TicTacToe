@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEngine.Exceptions;
+using System;
 using System.Collections.Generic;
 using static GameEngine.PlayerEnum;
 
@@ -41,20 +42,18 @@ namespace GameEngine
 
         public void SetPosition(Player player, int position) 
         {
-            // TODO - custom exception
-
             if (position <= 0)
-                throw new Exception("Position selection too small.");
+                throw new PositionException("Position selection too small.");
 
             if (position >= 10)
-                throw new Exception("Position selection too large.");
+                throw new PositionException("Position selection too large.");
 
             if (_board.TryGetValue(position, out string s))
             {
                 if (s.Equals(string.Empty))
                     _board[position] = player.ToString();
                 else
-                    throw new Exception("Position already taken.");
+                    throw new PositionException("Position already taken.");
             }
         }
 

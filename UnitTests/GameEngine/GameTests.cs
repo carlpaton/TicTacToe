@@ -1,4 +1,5 @@
 using GameEngine;
+using GameEngine.Exceptions;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
@@ -62,14 +63,14 @@ namespace UnitTests.GameEngine
         [TestCase(0)]
         [TestCase(10)]
         [TestCase(42)]
-        public void SetPosition_GivenPlayerAndInValidPosition_ThrowsException(int position)
+        public void SetPosition_GivenPlayerAndInValidPosition_ThrowsPositionException(int position)
         {
             // Arrange
             IGame classUnderTest = new Game();
 
             // Act
             // Assert
-            Assert.Throws<Exception>(() => classUnderTest.SetPosition(Player.O, position));
+            Assert.Throws<PositionException>(() => classUnderTest.SetPosition(Player.O, position));
         }
     }
 }

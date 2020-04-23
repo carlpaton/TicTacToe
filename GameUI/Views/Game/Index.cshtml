@@ -1,0 +1,85 @@
+﻿@model GameUI.Models.GameViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style type="text/css">
+    .board {
+        width: 300px;
+    }
+
+    .wrapper {
+        display: flex;
+        margin: auto;
+    }
+
+    .item {
+        flex-grow: 1;
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        font-size: 50px;
+    }
+
+    .item:hover {
+        cursor: pointer;
+        background-color: #b6b6b6;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid #000000;
+    }
+
+    .border-right {
+        border-right: 1px solid #000000;
+    }
+</style>
+
+<div class="board">
+    <div class="wrapper">
+        <div class="item border-bottom border-right" data-square="1">
+            @Html.DisplayFor(m => Model.Square1)
+        </div>
+        <div class="item border-bottom border-right" data-square="2">
+            @Html.DisplayFor(m => Model.Square2)
+        </div>
+        <div class="item border-bottom" data-square="3">
+            @Html.DisplayFor(m => Model.Square3)
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="item border-bottom border-right" data-square="4">
+            @Html.DisplayFor(m => Model.Square4)
+        </div>
+        <div class="item border-bottom border-right" data-square="5">
+            @Html.DisplayFor(m => Model.Square5)
+        </div>
+        <div class="item border-bottom" data-square="6">
+            @Html.DisplayFor(m => Model.Square6)
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="item border-right" data-square="7">
+            @Html.DisplayFor(m => Model.Square7)
+        </div>
+        <div class="item border-right" data-square="8">
+            @Html.DisplayFor(m => Model.Square8)
+        </div>
+        <div class="item" data-square="9">
+            @Html.DisplayFor(m => Model.Square9)
+        </div>
+    </div>
+</div>
+
+@section ScriptsGameController {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".item").click(function () {
+                var squareNumber = $(this).attr("data-square");
+                $(this).text("B");
+            });
+        })
+    </script>
+}

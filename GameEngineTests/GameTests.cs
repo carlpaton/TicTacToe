@@ -1,10 +1,10 @@
+using GameEngine;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
-using TicTacToe;
-using static TicTacToe.PlayerEnum;
+using static GameEngine.PlayerEnum;
 
-namespace Tests
+namespace GameEngineTests
 {
     public class GameTests
     {

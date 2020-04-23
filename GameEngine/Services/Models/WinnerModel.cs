@@ -1,6 +1,6 @@
-﻿using static TicTacToe.PlayerEnum;
+﻿using static GameEngine.PlayerEnum;
 
-namespace TicTacToe.Services.Models
+namespace GameEngine.Services.Models
 {
     public class WinnerModel
     {

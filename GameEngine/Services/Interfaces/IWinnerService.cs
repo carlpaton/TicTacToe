@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TicTacToe.Services.Models;
+using GameEngine.Services.Models;
 
-namespace TicTacToe.Services.Interfaces
+namespace GameEngine.Services.Interfaces
 {
     public interface IWinnerService
     {

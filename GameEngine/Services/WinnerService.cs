@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using TicTacToe.Services.Interfaces;
-using TicTacToe.Services.Models;
-using static TicTacToe.PlayerEnum;
+using GameEngine.Services.Interfaces;
+using GameEngine.Services.Models;
+using static GameEngine.PlayerEnum;
 
-namespace TicTacToe.Services
+namespace GameEngine.Services
 {
     public class WinnerService : IWinnerService
     {

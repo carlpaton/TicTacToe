@@ -1,4 +1,4 @@
-﻿namespace TicTacToe
+﻿namespace GameEngine
 {
     public class PlayerEnum
     {

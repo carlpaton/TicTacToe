@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using static TicTacToe.PlayerEnum;
+using static GameEngine.PlayerEnum;
 
-namespace TicTacToe
+namespace GameEngine
 {
     public interface IGame
     {

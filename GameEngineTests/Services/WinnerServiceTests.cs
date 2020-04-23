@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
-using TicTacToe;
-using TicTacToe.Services;
-using TicTacToe.Services.Interfaces;
-using static TicTacToe.PlayerEnum;
+﻿using GameEngine;
+using GameEngine.Services;
+using GameEngine.Services.Interfaces;
+using NUnit.Framework;
+using static GameEngine.PlayerEnum;
 
-namespace TicTacToeTests.Services
+namespace GameEngineTests.Services
 {
     public class WinnerServiceTests
     {

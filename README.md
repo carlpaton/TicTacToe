@@ -3,9 +3,11 @@ Classic kids game with a board divided into 9 squares placed over 3 rows with 3 
 
 ![https://board-games-galore.fandom.com/wiki/Tic-tac-toe](https://vignette.wikia.nocookie.net/board-games-galore/images/4/47/Tictactoe-winning-vector-639732.jpg/revision/latest?cb=20160711013756)
 
-### Game
+## Game
 
-**Class**: `Game`
+The `Game` class that is concerned with the games state in the form of a board. The state is stored in the private member `Dictionary<int, string> _board`
+
+**Interface**: `IGame`
 
 ### ResetBoard
 
@@ -37,5 +39,27 @@ Gets the value of the given position. The default value of `string.empty` is ret
 
 ```c#
 string GetPositionValue(int position);
+```
+
+### GetCurrentBoard
+
+Returns the current board.
+
+```c#
+Dictionary<int, string> GetCurrentBoard();
+```
+
+## WinnerService
+
+Service to check for winners on the current board.
+
+**Interface**: `IWinnerService`
+
+### GetWinner
+
+Checks the given game board to see if there is a winner.
+
+```c#
+WinnerModel GetWinner(Dictionary<int, string> board);
 ```
 

@@ -1,21 +1,42 @@
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using TicTacToe;
+using static TicTacToe.PlayerEnum;
 
 namespace Tests
 {
     public class GameTests
     {
         [Test]
+        public void ResetBoard_WhenCurrentBoardHasUsedPositions_ClearsTheBoard()
+        {
+            // Arrange
+            IGame classUnderTest = new Game();
+            var player = Player.O;
+            classUnderTest.SetRandomPosition(player);
+            classUnderTest.SetRandomPosition(player);            
+            var expected = "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\",\"8\":\"\",\"9\":\"\"}";
+
+            // Act
+            classUnderTest.ResetBoard();
+            var currentBoard = classUnderTest.GetCurrentBoard();
+            var actual = JsonConvert.SerializeObject(currentBoard);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
         public void SetRandomPosition_GivenPlayer_SetsBoardPosition()
         {
             // Arrange
-            var game = new Game();
-            var player = Game.Player.O;
+            IGame classUnderTest = new Game();
+            var player = Player.O;
 
             // Act
-            var position = game.SetRandomPosition(player);
-            var expected = game.GetPositionValue(position);
+            var position = classUnderTest.SetRandomPosition(player);
+            var expected = classUnderTest.GetPositionValue(position);
 
             // Assert
             Assert.AreEqual(expected, player.ToString());
@@ -25,16 +46,16 @@ namespace Tests
         public void SetPosition_GivenPlayerAndValidPosition_SetsBoardPosition()
         {
             // Arrange
-            var game = new Game();
+            IGame classUnderTest = new Game();
             var position = 5;
-            var player = Game.Player.O;
+            var expected = Player.O;
 
             // Act
-            game.SetPosition(player, position);
-            var expected = game.GetPositionValue(position);
+            classUnderTest.SetPosition(expected, position);
+            var actual = classUnderTest.GetPositionValue(position);
 
             // Assert
-            Assert.AreEqual(expected, player.ToString());
+            Assert.AreEqual(expected.ToString(), actual);
         }
 
         [TestCase(-5)]
@@ -44,11 +65,11 @@ namespace Tests
         public void SetPosition_GivenPlayerAndInValidPosition_ThrowsException(int position)
         {
             // Arrange
-            var game = new Game();
+            IGame classUnderTest = new Game();
 
             // Act
             // Assert
-            Assert.Throws<Exception>(() => game.SetPosition(Game.Player.O, position));
+            Assert.Throws<Exception>(() => classUnderTest.SetPosition(Player.O, position));
         }
     }
 }

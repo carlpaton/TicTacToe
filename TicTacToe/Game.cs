@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using static TicTacToe.PlayerEnum;
 
 namespace TicTacToe
 {
-    public class Game
+    public class Game : IGame
     {
-        private Dictionary<int, string> _board;
-        public enum Player { X, O };
+        private Dictionary<int, string> _board;       
 
         public Game() 
         {
@@ -66,10 +66,9 @@ namespace TicTacToe
             return string.Empty;
         }
 
-        public string GetWinner() 
+        public Dictionary<int, string> GetCurrentBoard() 
         {
-            // TODO
-            throw new NotImplementedException();
+            return _board;
         }
     }
 }

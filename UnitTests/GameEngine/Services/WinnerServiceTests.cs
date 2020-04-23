@@ -4,7 +4,7 @@ using GameEngine.Services.Interfaces;
 using NUnit.Framework;
 using static GameEngine.PlayerEnum;
 
-namespace GameEngineTests.Services
+namespace UnitTests.GameEngine.Services
 {
     public class WinnerServiceTests
     {

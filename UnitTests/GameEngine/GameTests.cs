@@ -4,7 +4,7 @@ using NUnit.Framework;
 using System;
 using static GameEngine.PlayerEnum;
 
-namespace GameEngineTests
+namespace UnitTests.GameEngine
 {
     public class GameTests
     {

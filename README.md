@@ -3,63 +3,20 @@ Classic kids game with a board divided into 9 squares placed over 3 rows with 3 
 
 ![https://board-games-galore.fandom.com/wiki/Tic-tac-toe](https://raw.githubusercontent.com/carlpaton/TicTacToe/master/Data/tictactoe.jpg)
 
+## Artificial Intelligence (AI)
+
+The game has 3 levels
+
+| Level  | Description                                                  |
+| ------ | ------------------------------------------------------------ |
+| Easy   | The computer will always use Game.SetRandomPosition          |
+| Medium | The computer will favor high value squares first, then randomly select from those squares first. High value squares are determined by the number of possible winning lines they can be a part of. They would be 4 for the middle, 3 for the corners and 2 for each middle. |
+| Hard   | The computer will determine if you have a possible winning line and block you, if not revert to medium level flow. |
+
 ## Game
 
-The `Game` class that is concerned with the games state in the form of a board. The state is stored in the private member `Dictionary<int, string> _board`
-
-**Interface**: `IGame`
-
-### ResetBoard
-
-Resets the board to have no squares selected. This would be called on Game init and at the end of a round.
-
-```c#
-void ResetBoard();
-```
-
-### SetRandomPosition
-
-Sets a random position on the board for the given player and returns the position it was set at.
-
-```c#
-int SetRandomPosition(Player player);
-```
-
-### SetPosition
-
-Sets the position for the given player, exceptions are thrown for invalid and taken positions.
-
-```c#
-void SetPosition(Player player, int position)
-```
-
-### GetPositionValue
-
-Gets the value of the given position. The default value of `string.empty` is returned if nothing is found.
-
-```c#
-string GetPositionValue(int position);
-```
-
-### GetCurrentBoard
-
-Returns the current board.
-
-```c#
-Dictionary<int, string> GetCurrentBoard();
-```
+Game
 
 ## WinnerService
 
-Service to check for winners on the current board.
-
-**Interface**: `IWinnerService`
-
-### GetWinner
-
-Checks the given game board to see if there is a winner.
-
-```c#
-WinnerModel GetWinner(Dictionary<int, string> board);
-```
-
+Winner Service

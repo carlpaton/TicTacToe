@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GameUI.Models;
+using GameEngine.Services.Interfaces;
+using GameEngine;
+using System;
+using static GameEngine.PlayerEnum;
+using GameEngine.Exceptions;
 
 namespace GameUI.Controllers
 {
@@ -7,23 +12,40 @@ namespace GameUI.Controllers
     [ApiController]
     public class ApiGameController : ControllerBase
     {
-        private readonly DummyContext _context;
+        private readonly IGame _game;
+        private readonly IWinnerService _winnerService;
 
-        public ApiGameController(DummyContext context)
+        public ApiGameController(IGame game, IWinnerService winnerService)
         {
-            _context = context;
+            _game = game;
+            _winnerService = winnerService;
         }
 
         // POST: api/ApiGame
         [HttpPost]
         public IActionResult Post(ApiGameMoveModel apiGameMoveModel)
         {
-            var response = new ApiGameMoveModel
+            var apiGameMoveResponseModel = new ApiGameMoveResponseModel();
+
+            try 
             {
-                Id = 42,
-                Player = "player that was updated"
-            };
-            return new JsonResult(response);
+                Enum.TryParse(_game.GetCurrentPlayer(), out Player player);
+                _game.SetPosition(player, int.Parse(apiGameMoveModel.SquareNumber));
+                _game.SwapCurrentPlayer();
+
+                apiGameMoveResponseModel.Status = "ok";
+                apiGameMoveResponseModel.CurrentPlayer = _game.GetCurrentPlayer();
+            }
+            catch (PositionException exp) 
+            {
+                var message = exp.Message;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return new JsonResult(apiGameMoveResponseModel);
         }
     }
 }

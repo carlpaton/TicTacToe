@@ -39,7 +39,7 @@
 
 <div class="board">
 
-    <h2>Current player: <span id="currentPlayer">X</span></h2>
+    <h2>Current player: <span id="currentPlayer">@Html.DisplayFor(m => Model.CurrentPlayer)</span></h2>
 
     <div class="wrapper">
         <div class="item border-bottom border-right" data-square="1">
@@ -80,25 +80,42 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $(".item").click(function () {
-                var squareNumber = $(this).attr("data-square");
-                var currentPlayer = $("#currentPlayer").text();
-                $(this).text(currentPlayer);
+                var squareNumber = $(this).attr("data-square");                
+                var elem = $(this);
+
+                var data = JSON.stringify({
+                    SquareNumber: squareNumber
+                });
 
                 $.ajax({
                     type: "POST",
                     url: "/api/apigame",
-                    data: JSON.stringify({ Id: "1", Player: "O" }),
-                    success: success,
+                    data: data,
                     contentType: "application/json",
-                    error: function (xhr, error, status) {
-                        console.log(error, status);
-                    }
+                    success: function (data) {
+                        if (data.status === "ok") {                            
+                            $(elem).text($("#currentPlayer").text());
+                            $("#currentPlayer").text(data.currentPlayer);
+                        }
+                    },
+                    error: error
                 });
             });
         });
 
-        function success(data) {
-            alert(JSON.stringify(data));
+        function error(xhr, error, status) {
+            // console.log("xhr=" + JSON.stringify(xhr)); // ~ this is a stack trace
+            console.log("error=" + error);
+            console.log("status=" + status);
+        }
+
+        function switchPlayer() {
+            var currentPlayer = $("#currentPlayer").text();
+            if (currentPlayer == "X") {
+                $("#currentPlayer").text("O");
+            } else {
+                $("#currentPlayer").text("X");
+            }
         }
     </script>
 }

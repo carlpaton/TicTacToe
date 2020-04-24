@@ -7,11 +7,21 @@ namespace GameEngine
 {
     public class Game : IGame
     {
+        private string _currentPlayer;
         private Dictionary<int, string> _board;       
 
         public Game() 
         {
+            _currentPlayer = "X";
             ResetBoard();
+        }
+
+        public void SwapCurrentPlayer()
+        {
+            if (_currentPlayer.Equals("X"))
+                _currentPlayer = "O";
+            else
+                _currentPlayer = "X";
         }
 
         public void ResetBoard()
@@ -68,6 +78,11 @@ namespace GameEngine
         public Dictionary<int, string> GetCurrentBoard() 
         {
             return _board;
+        }
+
+        public string GetCurrentPlayer()
+        {
+            return _currentPlayer;
         }
     }
 }

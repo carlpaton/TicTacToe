@@ -2,7 +2,12 @@
 {
     public class ApiGameMoveModel
     {
-        public int Id { get; set; }
-        public string Player { get; set; }
+        public string SquareNumber { get; set; }
+    }
+
+    public class ApiGameMoveResponseModel
+    {
+        public string Status { get; set; }
+        public string CurrentPlayer { get; set; }
     }
 }

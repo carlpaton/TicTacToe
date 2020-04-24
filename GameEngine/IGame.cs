@@ -36,5 +36,9 @@ namespace GameEngine
         /// </summary>
         /// <returns></returns>
         Dictionary<int, string> GetCurrentBoard();
+
+        void SwapCurrentPlayer();
+
+        string GetCurrentPlayer();
     }
 }

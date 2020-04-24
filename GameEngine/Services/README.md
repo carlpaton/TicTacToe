@@ -33,3 +33,11 @@ Resets the current log. Returns the new empty log.
 ```c#
 string Reset();
 ```
+
+### GetLog
+
+Returns the current log, ordered with the most recent logs first.
+
+```c#
+string GetLog();
+```

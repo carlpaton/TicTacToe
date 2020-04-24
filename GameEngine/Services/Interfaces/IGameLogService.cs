@@ -14,5 +14,11 @@
         /// </summary>
         /// <returns></returns>
         string Reset();
+
+        /// <summary>
+        /// Returns the current log, ordered with the most recent logs first.
+        /// </summary>
+        /// <returns></returns>
+        string GetLog();
     }
 }

@@ -9,5 +9,6 @@
     {
         public string Status { get; set; }
         public string CurrentPlayer { get; set; }
+        public string CurrentGameLog { get; set; }
     }
 }

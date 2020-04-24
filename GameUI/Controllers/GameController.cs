@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GameUI.Models;
 using GameEngine;
+using GameEngine.Services.Interfaces;
 
 namespace GameUI.Controllers
 {
     public class GameController : Controller
     {
         private readonly IGame _game;
+        private readonly IGameLogService _gameLogService;
 
-        public GameController(IGame game)
+        public GameController(IGame game, IGameLogService gameLogService)
         {
             _game = game;
+            _gameLogService = gameLogService;
         }
 
         public IActionResult Index()
@@ -20,6 +23,8 @@ namespace GameUI.Controllers
 
         public IActionResult Reset()
         {
+            _gameLogService.Reset();
+            _gameLogService.Append("Game reset");
             _game.ResetBoard();
             return RedirectToAction("Index");
         }
@@ -29,6 +34,8 @@ namespace GameUI.Controllers
             return new GameViewModel()
             {
                 CurrentPlayer = _game.GetCurrentPlayer(),
+
+                CurrentGameLog = _gameLogService.GetLog(),
 
                 Square1 = _game.GetPositionValue(1),
                 Square2 = _game.GetPositionValue(2),

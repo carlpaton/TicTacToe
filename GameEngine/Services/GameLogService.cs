@@ -20,7 +20,7 @@ namespace GameEngine.Services
             return GetLog();
         }
 
-        private string GetLog() 
+        public string GetLog() 
         {
             var arr = _log.ToArray();
             Array.Reverse(arr);

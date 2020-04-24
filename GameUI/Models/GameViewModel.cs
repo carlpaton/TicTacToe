@@ -6,6 +6,8 @@
 
         public string CurrentPlayer { get; set; }
 
+        public string CurrentGameLog { get; set; }
+
         public string Square1 { get; set; }
         public string Square2 { get; set; }
         public string Square3 { get; set; }

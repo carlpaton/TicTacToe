@@ -5,6 +5,7 @@ using GameEngine;
 using System;
 using static GameEngine.PlayerEnum;
 using GameEngine.Exceptions;
+using System.Net;
 
 namespace GameUI.Controllers
 {
@@ -14,11 +15,13 @@ namespace GameUI.Controllers
     {
         private readonly IGame _game;
         private readonly IWinnerService _winnerService;
+        private readonly IGameLogService _gameLogService;
 
-        public ApiGameController(IGame game, IWinnerService winnerService)
+        public ApiGameController(IGame game, IWinnerService winnerService, IGameLogService gameLogService)
         {
             _game = game;
             _winnerService = winnerService;
+            _gameLogService = gameLogService;
         }
 
         // POST: api/ApiGame
@@ -33,8 +36,9 @@ namespace GameUI.Controllers
                 _game.SetPosition(player, int.Parse(apiGameMoveModel.SquareNumber));
                 _game.SwapCurrentPlayer();
 
-                apiGameMoveResponseModel.Status = "ok";
+                apiGameMoveResponseModel.Status = HttpStatusCode.OK.ToString();
                 apiGameMoveResponseModel.CurrentPlayer = _game.GetCurrentPlayer();
+                apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Player {_game.GetCurrentPlayer()} chose square number {apiGameMoveModel.SquareNumber}");
             }
             catch (PositionException exp) 
             {

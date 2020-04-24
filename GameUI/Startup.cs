@@ -37,8 +37,9 @@ namespace GameUI
             services.AddDbContext<DummyContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DummyContext")));
 
-            // Game state to remain
+            // State to remain
             services.AddSingleton<IGame>(new Game());
+            services.AddSingleton<IGameLogService>(new GameLogService());
 
             // No state held so new instance if fine
             services.AddTransient<IWinnerService, WinnerService>();

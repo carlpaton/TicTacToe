@@ -72,5 +72,9 @@ namespace UnitTests.GameEngine
             // Assert
             Assert.Throws<PositionException>(() => classUnderTest.SetPosition(Player.O, position));
         }
+
+        // TODO ~ SwapCurrentPlayer
+
+        // TODO ~ GetCurrentPlayer
     }
 }

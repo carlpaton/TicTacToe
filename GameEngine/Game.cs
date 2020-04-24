@@ -7,21 +7,20 @@ namespace GameEngine
 {
     public class Game : IGame
     {
-        private string _currentPlayer;
+        private string _currentPlayer = Player.X.ToString();
         private Dictionary<int, string> _board;       
 
         public Game() 
         {
-            _currentPlayer = "X";
             ResetBoard();
         }
 
         public void SwapCurrentPlayer()
         {
-            if (_currentPlayer.Equals("X"))
-                _currentPlayer = "O";
+            if (_currentPlayer.Equals(Player.X.ToString()))
+                _currentPlayer = Player.O.ToString();
             else
-                _currentPlayer = "X";
+                _currentPlayer = Player.X.ToString();
         }
 
         public void ResetBoard()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using GameUI.Models;
 
 namespace GameUI.Models
 {
@@ -14,5 +15,7 @@ namespace GameUI.Models
         }
 
         public DbSet<GameUI.Models.GameViewModel> GameViewModel { get; set; }
+
+        public DbSet<GameUI.Models.ApiGameMoveModel> ApiGameMoveModel { get; set; }
     }
 }

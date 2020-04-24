@@ -38,6 +38,9 @@
 </style>
 
 <div class="board">
+
+    <h2>Current player: <span id="currentPlayer">X</span></h2>
+
     <div class="wrapper">
         <div class="item border-bottom border-right" data-square="1">
             @Html.DisplayFor(m => Model.Square1)
@@ -78,8 +81,24 @@
         $(document).ready(function () {
             $(".item").click(function () {
                 var squareNumber = $(this).attr("data-square");
-                $(this).text("B");
+                var currentPlayer = $("#currentPlayer").text();
+                $(this).text(currentPlayer);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/apigame",
+                    data: JSON.stringify({ Id: "1", Player: "O" }),
+                    success: success,
+                    contentType: "application/json",
+                    error: function (xhr, error, status) {
+                        console.log(error, status);
+                    }
+                });
             });
-        })
+        });
+
+        function success(data) {
+            alert(JSON.stringify(data));
+        }
     </script>
 }

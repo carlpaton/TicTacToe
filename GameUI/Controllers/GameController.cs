@@ -15,20 +15,7 @@ namespace GameUI.Controllers
         // GET: Game
         public IActionResult Index()
         {
-            var gameViewModel = new GameViewModel
-            {
-                Square1 = "X",
-                Square2 = "O",
-                Square3 = "O",
-                Square4 = "X",
-                Square5 = "X",
-                Square6 = "O",
-                Square7 = "O",
-                Square8 = "O",
-                Square9 = "X"
-            };
-
-            return View(gameViewModel);
+            return View(new GameViewModel());
         }
     }
 }

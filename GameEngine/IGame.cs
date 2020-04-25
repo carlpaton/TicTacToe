@@ -1,21 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using GameEngine.Services.ComputerMove;
+using System.Collections.Generic;
 using static GameEngine.PlayerEnum;
 
 namespace GameEngine
 {
     public interface IGame
     {
+        ComputerLevel ComputerLevel { get; set; }
+
         /// <summary>
         /// Resets the board to have no squares selected. This would be called on Game init and at the end of a round.
         /// </summary>
         void ResetBoard();
-
-        /// <summary>
-        /// Sets a random position on the board for the given player and returns the position it was set at.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
-        int SetRandomPosition(Player player);
 
         /// <summary>
         /// Sets the position for the given player, exceptions are thrown for invalid and taken positions.

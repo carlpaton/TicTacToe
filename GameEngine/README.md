@@ -12,14 +12,6 @@ Resets the board to have no squares selected. This would be called on Game init 
 void ResetBoard();
 ```
 
-### SetRandomPosition
-
-Sets a random position on the board for the given player and returns the position it was set at.
-
-```c#
-int SetRandomPosition(Player player);
-```
-
 ### SetPosition
 
 Sets the position for the given player, exceptions are thrown for invalid and taken positions.

@@ -9,6 +9,8 @@ using GameUI.Models;
 using GameEngine;
 using GameEngine.Services.Interfaces;
 using GameEngine.Services;
+using GameEngine.Services.ComputerMove;
+using GameEngine.Services.ComputerMove.MoveRules;
 
 namespace GameUI
 {
@@ -43,6 +45,8 @@ namespace GameUI
 
             // No state held so new instance if fine
             services.AddTransient<IWinnerService, WinnerService>();
+            services.AddTransient<IComputerMove, ComputerMoveEasy>();
+            services.AddTransient<IComputerMove, ComputerMoveMedium>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

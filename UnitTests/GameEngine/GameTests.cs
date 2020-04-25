@@ -15,8 +15,8 @@ namespace UnitTests.GameEngine
             // Arrange
             IGame classUnderTest = new Game();
             var player = Player.O;
-            classUnderTest.SetRandomPosition(player);
-            classUnderTest.SetRandomPosition(player);            
+            classUnderTest.SetPosition(player, 1);
+            classUnderTest.SetPosition(player, 2);            
             var expected = "{\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"\",\"5\":\"\",\"6\":\"\",\"7\":\"\",\"8\":\"\",\"9\":\"\"}";
 
             // Act
@@ -28,20 +28,20 @@ namespace UnitTests.GameEngine
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
-        public void SetRandomPosition_GivenPlayer_SetsBoardPosition()
-        {
-            // Arrange
-            IGame classUnderTest = new Game();
-            var player = Player.O;
+        //[Test]
+        //public void SetRandomPosition_GivenPlayer_SetsBoardPosition()
+        //{
+        //    // Arrange
+        //    IGame classUnderTest = new Game();
+        //    var player = Player.O;
 
-            // Act
-            var position = classUnderTest.SetRandomPosition(player);
-            var expected = classUnderTest.GetPositionValue(position);
+        //    // Act
+        //    var position = classUnderTest.SetRandomPosition(player);
+        //    var expected = classUnderTest.GetPositionValue(position);
 
-            // Assert
-            Assert.AreEqual(expected, player.ToString());
-        }
+        //    // Assert
+        //    Assert.AreEqual(expected, player.ToString());
+        //}
 
         [Test]
         public void SetPosition_GivenPlayerAndValidPosition_SetsBoardPosition()

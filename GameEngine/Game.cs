@@ -1,17 +1,22 @@
 ﻿using GameEngine.Exceptions;
-using System;
+using GameEngine.Services.ComputerMove;
 using System.Collections.Generic;
 using static GameEngine.PlayerEnum;
 
 namespace GameEngine
 {
     public class Game : IGame
-    {
+    { 
+        // TODO ~ this member being public is just a quick hack while buulding `ComputerMove` rules
+        // the UI will need to be able to set this
+        public ComputerLevel ComputerLevel { get; set; }
+
         private string _currentPlayer = Player.X.ToString();
         private Dictionary<int, string> _board;       
 
         public Game() 
         {
+            ComputerLevel = ComputerLevel.Easy;
             ResetBoard();
         }
 
@@ -30,23 +35,6 @@ namespace GameEngine
             {
                 _board.Add(i, string.Empty);
             }
-        }
-
-        public int SetRandomPosition(Player player) 
-        {
-            for (int i = 1; i <= 9; i++)
-            {
-                var random = new Random().Next(i, 9);
-                if (_board.TryGetValue(random, out string s))
-                {
-                    if (s.Equals(string.Empty)) 
-                    {
-                        _board[random] = player.ToString();
-                        return random;
-                    }                        
-                }
-            }
-            throw new Exception("Board set random failed.");
         }
 
         public void SetPosition(Player player, int position) 

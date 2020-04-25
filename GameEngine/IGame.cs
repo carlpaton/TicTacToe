@@ -37,8 +37,15 @@ namespace GameEngine
         /// <returns></returns>
         Dictionary<int, string> GetCurrentBoard();
 
+        /// <summary>
+        /// Swaps the current player. Example: X becomes O and vice versa.
+        /// </summary>
         void SwapCurrentPlayer();
 
+        /// <summary>
+        /// Returns the current player stored in game state.
+        /// </summary>
+        /// <returns></returns>
         string GetCurrentPlayer();
     }
 }

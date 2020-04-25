@@ -34,19 +34,27 @@ namespace GameUI.Controllers
             {
                 Enum.TryParse(_game.GetCurrentPlayer(), out Player player);
                 _game.SetPosition(player, int.Parse(apiGameMoveModel.SquareNumber));
-
                 apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Player {_game.GetCurrentPlayer()} chose square number {apiGameMoveModel.SquareNumber}");
-                _game.SwapCurrentPlayer();
-
-                apiGameMoveResponseModel.Status = HttpStatusCode.OK.ToString();
-                apiGameMoveResponseModel.CurrentPlayer = _game.GetCurrentPlayer();
-                
-
+                                
                 var winnerModel = _winnerService.GetWinner(_game.GetCurrentBoard());
                 if (winnerModel.HasWon) 
                 {
                     apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Winner! Player {winnerModel.Player} wins!");
+                } 
+                else 
+                {
+                    // AI level 1
+                    _game.SwapCurrentPlayer();
+                    Enum.TryParse(_game.GetCurrentPlayer(), out Player playerComputer);
+                    var positionComputer = _game.SetRandomPosition(playerComputer);
+                    apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Computer {_game.GetCurrentPlayer()} chose square number {positionComputer}");
+                    _game.SwapCurrentPlayer();
+
+                    // TODO AI level 2,3        
                 }
+
+                apiGameMoveResponseModel.Status = HttpStatusCode.OK.ToString();
+                apiGameMoveResponseModel.CurrentPlayer = _game.GetCurrentPlayer();
             }
             catch (PositionException exp) 
             {

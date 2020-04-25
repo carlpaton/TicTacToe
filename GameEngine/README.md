@@ -44,3 +44,18 @@ Returns the current board.
 Dictionary<int, string> GetCurrentBoard();
 ```
 
+### SwapCurrentPlayer
+
+Swaps the current player. Example: X becomes O and vice versa.
+
+```c#
+void SwapCurrentPlayer();
+```
+
+### GetCurrentPlayer
+
+Returns the current player stored in game state.
+
+```c#
+string GetCurrentPlayer();
+```

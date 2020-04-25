@@ -28,21 +28,6 @@ namespace UnitTests.GameEngine
             Assert.AreEqual(expected, actual);
         }
 
-        //[Test]
-        //public void SetRandomPosition_GivenPlayer_SetsBoardPosition()
-        //{
-        //    // Arrange
-        //    IGame classUnderTest = new Game();
-        //    var player = Player.O;
-
-        //    // Act
-        //    var position = classUnderTest.SetRandomPosition(player);
-        //    var expected = classUnderTest.GetPositionValue(position);
-
-        //    // Assert
-        //    Assert.AreEqual(expected, player.ToString());
-        //}
-
         [Test]
         public void SetPosition_GivenPlayerAndValidPosition_SetsBoardPosition()
         {

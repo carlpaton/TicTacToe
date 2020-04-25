@@ -7,6 +7,7 @@ namespace GameEngine
     public interface IGame
     {
         ComputerLevel ComputerLevel { get; set; }
+        bool GameOver { get; set; }
 
         /// <summary>
         /// Resets the board to have no squares selected. This would be called on Game init and at the end of a round.

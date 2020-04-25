@@ -10,13 +10,15 @@ namespace GameEngine
         // TODO ~ this member being public is just a quick hack while buulding `ComputerMove` rules
         // the UI will need to be able to set this
         public ComputerLevel ComputerLevel { get; set; }
+        public bool GameOver { get; set; }
 
         private string _currentPlayer = Player.X.ToString();
         private Dictionary<int, string> _board;       
 
         public Game() 
         {
-            ComputerLevel = ComputerLevel.Easy;
+            ComputerLevel = ComputerLevel.Medium;
+            GameOver = false;
             ResetBoard();
         }
 

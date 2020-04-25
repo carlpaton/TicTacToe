@@ -30,7 +30,7 @@ namespace GameEngine.Services.ComputerMove.MoveRules
                     }
                 }
             }
-            throw new Exception("Board set random failed.");
+            throw new Exception("Board SetPosition failed.");
         }
     }
 }

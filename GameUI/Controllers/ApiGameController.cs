@@ -34,6 +34,11 @@ namespace GameUI.Controllers
         public IActionResult Post(ApiGameMoveModel apiGameMoveModel)
         {
             var apiGameMoveResponseModel = new ApiGameMoveResponseModel();
+            if (_game.GameOver) 
+            {
+                apiGameMoveResponseModel.Status = "GAMEOVER";
+                return new JsonResult(apiGameMoveResponseModel);
+            }
 
             try 
             {
@@ -44,6 +49,7 @@ namespace GameUI.Controllers
                 var winnerModel = _winnerService.GetWinner(_game.GetCurrentBoard());
                 if (winnerModel.HasWon) 
                 {
+                    _game.GameOver = true;
                     apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Winner! Player {winnerModel.Player} wins!");
                 } 
                 else 
@@ -60,7 +66,15 @@ namespace GameUI.Controllers
                     apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Computer {_game.GetCurrentPlayer()} chose square number {positionComputer}");
                     apiGameMoveResponseModel.Computer.Player = _game.GetCurrentPlayer();
                     apiGameMoveResponseModel.Computer.Square = positionComputer;
-                    _game.SwapCurrentPlayer();
+
+                    var computerHasWon = _winnerService.GetWinner(_game.GetCurrentBoard());
+                    if (computerHasWon.HasWon)
+                    {
+                        _game.GameOver = true;
+                        apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Winner! Computer {computerHasWon.Player} wins!");
+                    }
+                    else
+                        _game.SwapCurrentPlayer();
                 }
 
                 apiGameMoveResponseModel.Status = HttpStatusCode.OK.ToString();

@@ -26,6 +26,7 @@ namespace GameUI.Controllers
             _gameLogService.Reset();
             _gameLogService.Append("Game reset");
             _game.ResetBoard();
+            _game.GameOver = false;
             return RedirectToAction("Index");
         }
 

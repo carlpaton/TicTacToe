@@ -101,13 +101,15 @@
                     data: data,
                     contentType: "application/json",
                     success: function (data) {
-                        if (data.status === "OK") {                            
+                        if (data.status === "OK") {
                             $(elem).text($("#currentPlayer").text());
                             $("#currentPlayer").text(data.currentPlayer);
                             $("#currentGameLog").html(data.currentGameLog);
 
                             var square = ".square" + data.computer.square;
                             $(square).text(data.computer.player);
+                        } else if (data.status === "GAMEOVER") {
+                            alert("Games over mate!\nClick reset to play again.");
                         }
                     },
                     error: error

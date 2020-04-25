@@ -26,7 +26,7 @@ namespace GameEngine.Services
             Array.Reverse(arr);
 
             return string.Join(
-                Environment.NewLine,
+                "<br>",
                 arr);
         }
     }

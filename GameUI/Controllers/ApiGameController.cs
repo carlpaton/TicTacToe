@@ -34,11 +34,19 @@ namespace GameUI.Controllers
             {
                 Enum.TryParse(_game.GetCurrentPlayer(), out Player player);
                 _game.SetPosition(player, int.Parse(apiGameMoveModel.SquareNumber));
+
+                apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Player {_game.GetCurrentPlayer()} chose square number {apiGameMoveModel.SquareNumber}");
                 _game.SwapCurrentPlayer();
 
                 apiGameMoveResponseModel.Status = HttpStatusCode.OK.ToString();
                 apiGameMoveResponseModel.CurrentPlayer = _game.GetCurrentPlayer();
-                apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Player {_game.GetCurrentPlayer()} chose square number {apiGameMoveModel.SquareNumber}");
+                
+
+                var winnerModel = _winnerService.GetWinner(_game.GetCurrentBoard());
+                if (winnerModel.HasWon) 
+                {
+                    apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Winner! Player {winnerModel.Player} wins!");
+                }
             }
             catch (PositionException exp) 
             {

@@ -11,7 +11,7 @@ namespace UnitTests.GameEngine.Services
         {
             // Arrange
             IGameLogService classUnderTest = new GameLogService();
-            var expected = "bar\r\nfoo";
+            var expected = "bar<br>foo";
 
             // Act
             classUnderTest.Append("foo");

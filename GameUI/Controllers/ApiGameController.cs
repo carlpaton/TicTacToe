@@ -48,9 +48,13 @@ namespace GameUI.Controllers
                     Enum.TryParse(_game.GetCurrentPlayer(), out Player playerComputer);
                     var positionComputer = _game.SetRandomPosition(playerComputer);
                     apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Computer {_game.GetCurrentPlayer()} chose square number {positionComputer}");
-                    _game.SwapCurrentPlayer();
+                    
 
                     // TODO AI level 2,3        
+
+                    apiGameMoveResponseModel.Computer.Player = _game.GetCurrentPlayer();
+                    apiGameMoveResponseModel.Computer.Square = positionComputer;
+                    _game.SwapCurrentPlayer();
                 }
 
                 apiGameMoveResponseModel.Status = HttpStatusCode.OK.ToString();

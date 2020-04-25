@@ -42,35 +42,35 @@
         <h2>Current player: <span id="currentPlayer">@Html.DisplayFor(m => Model.CurrentPlayer)</span></h2>
 
         <div class="wrapper">
-            <div class="item border-bottom border-right" data-square="1">
+            <div class="item square1 border-bottom border-right" data-square="1">
                 @Html.DisplayFor(m => Model.Square1)
             </div>
-            <div class="item border-bottom border-right" data-square="2">
+            <div class="item square2 border-bottom border-right" data-square="2">
                 @Html.DisplayFor(m => Model.Square2)
             </div>
-            <div class="item border-bottom" data-square="3">
+            <div class="item square3 border-bottom" data-square="3">
                 @Html.DisplayFor(m => Model.Square3)
             </div>
         </div>
         <div class="wrapper">
-            <div class="item border-bottom border-right" data-square="4">
+            <div class="item square4 border-bottom border-right" data-square="4">
                 @Html.DisplayFor(m => Model.Square4)
             </div>
-            <div class="item border-bottom border-right" data-square="5">
+            <div class="item square5 border-bottom border-right" data-square="5">
                 @Html.DisplayFor(m => Model.Square5)
             </div>
-            <div class="item border-bottom" data-square="6">
+            <div class="item square6 border-bottom" data-square="6">
                 @Html.DisplayFor(m => Model.Square6)
             </div>
         </div>
         <div class="wrapper">
-            <div class="item border-right" data-square="7">
+            <div class="item square7 border-right" data-square="7">
                 @Html.DisplayFor(m => Model.Square7)
             </div>
-            <div class="item border-right" data-square="8">
+            <div class="item square8 border-right" data-square="8">
                 @Html.DisplayFor(m => Model.Square8)
             </div>
-            <div class="item" data-square="9">
+            <div class="item square9" data-square="9">
                 @Html.DisplayFor(m => Model.Square9)
             </div>
         </div>
@@ -105,6 +105,9 @@
                             $(elem).text($("#currentPlayer").text());
                             $("#currentPlayer").text(data.currentPlayer);
                             $("#currentGameLog").html(data.currentGameLog);
+
+                            var square = ".square" + data.computer.square;
+                            $(square).text(data.computer.player);
                         }
                     },
                     error: error

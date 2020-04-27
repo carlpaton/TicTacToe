@@ -10,13 +10,13 @@ The game has 3 levels
 | Level  | Description                                                  |
 | ------ | ------------------------------------------------------------ |
 | Easy   | The computer will always use Game.SetRandomPosition          |
-| Medium | The computer will favor high value squares first, then randomly select from those squares first. High value squares are determined by the number of possible winning lines they can be a part of. They would be 4 for the middle, 3 for the corners and 2 for each middle. |
+| Medium | The computer will favor high value squares first, then randomly select from those squares first. High value squares are determined by the number of possible winning lines they can be a part of. They would be 4 for the middle, 3 for the corners and 2 for each outer lying middle. |
 | Hard   | The computer will determine if you have a possible winning line and block you, if not revert to medium level flow. |
 
 ## Game
 
 [Game Engine](https://github.com/carlpaton/TicTacToe/tree/master/GameEngine)
 
-## WinnerService
+## Winner Service
 
 [Game Engine Service](https://github.com/carlpaton/TicTacToe/tree/master/GameEngine/Services)

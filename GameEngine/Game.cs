@@ -10,6 +10,8 @@ namespace GameEngine
         // TODO ~ this member being public is just a quick hack while buulding `ComputerMove` rules
         // the UI will need to be able to set this
         public ComputerLevel ComputerLevel { get; set; }
+
+        // TODO ~ this is also a hack, this state should be controlled by well defined methods
         public bool GameOver { get; set; }
 
         private string _currentPlayer = Player.X.ToString();

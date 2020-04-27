@@ -6,15 +6,15 @@ using static GameEngine.PlayerEnum;
 
 namespace UnitTests.GameEngine.Services.ComputerMove
 {
-    public class ComputerMoveEasyTests
+    public class ComputerMoveHardTests
     {
-        [TestCase(ComputerLevel.Easy, true)]
+        [TestCase(ComputerLevel.Easy, false)]
         [TestCase(ComputerLevel.Medium, false)]
-        [TestCase(ComputerLevel.Hard, false)]
+        [TestCase(ComputerLevel.Hard, true)]
         public void IsMatch_GivenComputerLevel_MatchesGivenExpected(ComputerLevel computerLevel, bool expected)
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveEasy();
+            IComputerMove classUnderTest = new ComputerMoveHard();
 
             // Act
             var actual = classUnderTest.IsMatch(computerLevel);
@@ -24,19 +24,22 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         }
 
         [Test]
-        public void SetPosition_GivenValidDataAndTheBoardHasOpenSquares_SetsBoardPosition()
+        public void SetPosition_I_E()
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveEasy();
+            IComputerMove classUnderTest = new ComputerMoveHard();
             var game = new Game();
-            var player = Player.O;
+            var computerPlayer = Player.O;
+            var humanPlayer = Player.X;
+            game.SetPosition(humanPlayer, 1);
+            game.SetPosition(humanPlayer, 2);
+            var expected = 3;
 
             // Act
-            var position = classUnderTest.SetPosition(player, game.GetCurrentBoard());
-            var expected = game.GetPositionValue(position);
+            var actual = classUnderTest.SetPosition(computerPlayer, game.GetCurrentBoard());            
 
             // Assert
-            Assert.AreEqual(expected, player.ToString());
+            Assert.AreEqual(expected, actual);
         }
     }
 }

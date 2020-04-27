@@ -12,6 +12,12 @@ namespace GameEngine.Services.ComputerMove.MoveRules
 
         public int SetPosition(PlayerEnum.Player playerComputer, Dictionary<int, string> board)
         {
+            /* BOARD SQUARES
+             * 1, 2, 3
+             * 4, 5, 6
+             * 7, 8, 9
+             */
+
             // high value board squares that allow x number of rows through/from them to win
             // 5       - it allows for 4 rows
             // 1,3,7,9 - they allow for 3 rows
@@ -43,9 +49,9 @@ namespace GameEngine.Services.ComputerMove.MoveRules
             {
                 var random = new Random().Next(i, highValueSquares.Count);
                 var randomTranslated = RandomTranslated(random, highValueSquares);
-                if (board.TryGetValue(randomTranslated, out string squareFourRows))
+                if (board.TryGetValue(randomTranslated, out string squareValue))
                 {
-                    if (squareFourRows.Equals(string.Empty))
+                    if (squareValue.Equals(string.Empty))
                     {
                         board[randomTranslated] = playerComputer.ToString();
                         return randomTranslated;

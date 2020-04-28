@@ -14,7 +14,7 @@ namespace GameEngine
         // TODO ~ this is also a hack, this state should be controlled by well defined methods
         public bool GameOver { get; set; }
 
-        private string _currentPlayer = Player.X.ToString();
+        private string _currentPlayer = Player.X.ToString(); // X is now the human forever more, this is not great as this is then assumed in the `ComputerMoveX` classes
         private Dictionary<int, string> _board;       
 
         public Game() 

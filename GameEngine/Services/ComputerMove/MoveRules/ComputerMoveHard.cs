@@ -13,6 +13,9 @@ namespace GameEngine.Services.ComputerMove.MoveRules
 
         public int SetPosition(Player playerComputer, Dictionary<int, string> board)
         {
+            // Determine if there are potential winning rows (For the computer to win)
+            // Determine if there are potential winning rows (For the human to win)
+
             /* BOARD SQUARES
              * 1, 2, 3
              * 4, 5, 6
@@ -21,32 +24,33 @@ namespace GameEngine.Services.ComputerMove.MoveRules
 
             var playersList = new List<Player>() 
             {
-                Player.O,
-                Player.X
+                Player.X, // Order is important as X is the human so check if the human can win first, not great to rely on order like this, consider this as an input. downside is the other `ComputerMoveX` classes will then need to take this param and probably not need it. Meh.
+                Player.O
             };
 
-            /* Logic to determine potential winning rows:
-             * 1. check vertically top down
-             * 2. check horizontally left right
-             * 3. check at 45 degrees top-left to bottom-right
-             * 4. check at 135 degrees top-right to bottom-left
-             */
-
-            var verticalSquareLists = new List<List<int>>()
+            var squareLists = new List<List<int>>()
             {
+                // check horizontally
                 new List<int>() { 1, 2, 3 },
                 new List<int>() { 4, 5, 6 },
-                new List<int>() { 7, 8, 9 }
+                new List<int>() { 7, 8, 9 },
+
+                // check vertically
+                new List<int>() { 1, 4, 7 },
+                new List<int>() { 2, 5, 8 },
+                new List<int>() { 3, 6, 9 },
+
+                // check at 45 degrees top-left to bottom-right
+                new List<int>() { 1, 5, 9 },
+
+                // check at 135 degrees top-right to bottom-left
+                new List<int>() { 3, 5, 7 }
             };
 
-            // Determine if there are potential winning rows (For the computer to win)
-
-            // Determine if there are potential winning rows (For the human to win)
-
-            foreach (var list in verticalSquareLists)
+            foreach (var list in squareLists)
             {
                 var playersFound = new List<PlayersFound>();
-                for (int i = 0; i <= list.Count; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
                     if (board.TryGetValue(list[i], out string squareValue)) 
                     {
@@ -65,16 +69,23 @@ namespace GameEngine.Services.ComputerMove.MoveRules
                     {
                         var playerCount = playersFound
                             .Count(x => x.Player == player.ToString());
+
                         if (playerCount == 2) 
                         {
                             list.Remove(playersFound[0].Square);
                             list.Remove(playersFound[1].Square);
 
+                            // this will either block the human or win the game for the computer
                             var openSpace = list[0];
+                            board[openSpace] = playerComputer.ToString();
+
+                            return openSpace; 
                         }
                     }        
                 }
             }
+
+            // TODO ~ inject the other rules into here and select one on a lower fall back `ComputerLevel`
 
             // no potential winning rows found
             return -1;

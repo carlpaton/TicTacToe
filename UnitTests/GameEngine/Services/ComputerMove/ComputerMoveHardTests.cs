@@ -26,6 +26,8 @@ namespace UnitTests.GameEngine.Services.ComputerMove
 
         [TestCaseSource("HorizontalData")]
         [TestCaseSource("VerticalData")]
+        [TestCaseSource("Degrees45")]
+        [TestCaseSource("Degrees135")]
         public void SetPosition_WhenTwoSquaresAreSetByTheHuman_TheComputerBlocksTheThird(int expected, int positionA, int positionB)
         {
             // Arrange
@@ -37,35 +39,94 @@ namespace UnitTests.GameEngine.Services.ComputerMove
             game.SetPosition(humanPlayer, positionB);
 
             // Act
-            var actual = classUnderTest.SetPosition(computerPlayer, game.GetCurrentBoard());            
+            var actual = classUnderTest.SetPosition(computerPlayer, game.GetCurrentBoard());
 
             // Assert
             Assert.AreEqual(expected, actual);
         }
 
-        // TODO 
-        // SetPosition_WhenTwoSquaresAreSetByTheComputer_TheComputerTakesTheThird
+        [TestCaseSource("HorizontalData")]
+        [TestCaseSource("VerticalData")]
+        [TestCaseSource("Degrees45")]
+        [TestCaseSource("Degrees135")]
+        public void SetPosition_WhenTwoSquaresAreSetByTheComputer_TheComputerTakesTheThird(int expected, int positionA, int positionB)
+        {
+            // Arrange
+            IComputerMove classUnderTest = new ComputerMoveHard();
+            var game = new Game();
+            var computerPlayer = Player.O;
+            game.SetPosition(computerPlayer, positionA);
+            game.SetPosition(computerPlayer, positionB);
+
+            // Act
+            var actual = classUnderTest.SetPosition(computerPlayer, game.GetCurrentBoard());
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
 
         static readonly object[] HorizontalData = new List<object>()
         {
-           new object[]{ 1, 2, 3 },
-           new object[]{ 2, 1, 3 },
-           new object[]{ 3, 1, 2 },
-           // TODO 4 5 6
-           // TODO 7 8 9
+            // row 1 ~ for the first row:
+            // 1 is the square expected to be blocked by the computer/human
+            // 2, 3 are already populated by the human/computer
+            // the subsequent lines are permutations of the above
+            new object[]{ 1, 2, 3 },
+            new object[]{ 2, 1, 3 },
+            new object[]{ 3, 1, 2 },
+
+            // row 2
+            new object[]{ 4, 5, 6 },
+            new object[]{ 5, 4, 6 },
+            new object[]{ 6, 4, 5 },
+
+            // row 3
+            new object[]{ 4, 5, 6 },
+            new object[]{ 5, 4, 6 },
+            new object[]{ 6, 4, 5 }
         }.ToArray();
 
         static readonly object[] VerticalData = new List<object>()
         {
-           new object[]{ 1, 4, 7 },
-           new object[]{ 4, 1, 7 },
-           new object[]{ 7, 1, 4 },
-           // TODO 2 5 8
-           // TODO 3 6 9
+            // column 1 ~ for the first row:
+            // 1 is the square expected to be blocked by the computer/human
+            // 4, 7 are already populated by the human/computer
+            // the subsequent lines are permutations of the above
+            new object[]{ 1, 4, 7 },
+            new object[]{ 4, 1, 7 },
+            new object[]{ 7, 1, 4 },
+
+            // column 2
+            new object[]{ 2, 5, 8 },
+            new object[]{ 5, 2, 8 },
+            new object[]{ 8, 2, 5 },
+
+            // column 3
+            new object[]{ 3, 6, 9 },
+            new object[]{ 6, 3, 9 },
+            new object[]{ 9, 3, 6 }
         }.ToArray();
 
-        // TODO check at 45 degrees top-left to bottom-right
+        static readonly object[] Degrees45 = new List<object>()
+        {
+            // 45 degrees top-left to bottom-right ~ for the first row:
+            // 1 is the square expected to be blocked by the computer/human
+            // 5, 9 are already populated by the human/computer
+            // the subsequent lines are permutations of the above
+            new object[]{ 1, 5, 9 },
+            new object[]{ 5, 1, 9 },
+            new object[]{ 9, 1, 5 }
+        }.ToArray();
 
-        // TODO check at 135 degrees top-right to bottom-left
+        static readonly object[] Degrees135 = new List<object>()
+        {
+            // 135 degrees top-right to bottom-left ~ for the first row:
+            // 3 is the square expected to be blocked by the computer/human
+            // 5, 7 are already populated by the human/computer
+            // the subsequent lines are permutations of the above
+            new object[]{ 3, 5, 7 },
+            new object[]{ 5, 3, 7 },
+            new object[]{ 7, 5, 3 }
+        }.ToArray();
     }
 }

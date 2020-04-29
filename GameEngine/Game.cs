@@ -19,7 +19,7 @@ namespace GameEngine
 
         public Game() 
         {
-            ComputerLevel = ComputerLevel.Medium;
+            ComputerLevel = ComputerLevel.Hard;
             GameOver = false;
             ResetBoard();
         }

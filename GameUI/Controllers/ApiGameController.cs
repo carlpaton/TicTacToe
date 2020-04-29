@@ -36,7 +36,11 @@ namespace GameUI.Controllers
             var apiGameMoveResponseModel = new ApiGameMoveResponseModel();
             if (_game.GameOver) 
             {
-                apiGameMoveResponseModel.Status = "GAMEOVER";
+                apiGameMoveResponseModel.Status = GameStatus
+                    .GameOver
+                    .ToString()
+                    .ToUpper();
+
                 return new JsonResult(apiGameMoveResponseModel);
             }
 
@@ -61,11 +65,25 @@ namespace GameUI.Controllers
                     var positionComputer = _computerMoves
                         .First(rule => rule
                         .IsMatch(_game.ComputerLevel))
-                        .SetPosition(playerComputer, _game.GetCurrentBoard());
+                        .SetPosition(playerComputer, _game.GetCurrentBoard(), _computerMoves);
 
-                    apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Computer {_game.GetCurrentPlayer()} chose square number {positionComputer}");
+                    if (positionComputer > 0)
+                        apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append($"Computer {_game.GetCurrentPlayer()} chose square number {positionComputer}");
+                    
                     apiGameMoveResponseModel.Computer.Player = _game.GetCurrentPlayer();
                     apiGameMoveResponseModel.Computer.Square = positionComputer;
+
+                    if (positionComputer.Equals((int)GameStatus.GameDraw))
+                    {
+                        apiGameMoveResponseModel.CurrentPlayer = GameStatus.GameDraw.ToString();
+                        apiGameMoveResponseModel.CurrentGameLog = _gameLogService.Append(GameStatus.GameDraw.ToString());
+                        apiGameMoveResponseModel.Status = GameStatus
+                            .GameDraw
+                            .ToString()
+                            .ToUpper();
+
+                        return new JsonResult(apiGameMoveResponseModel);
+                    }
 
                     var computerHasWon = _winnerService.GetWinner(_game.GetCurrentBoard());
                     if (computerHasWon.HasWon)

@@ -1,6 +1,7 @@
 ﻿using GameEngine;
 using GameEngine.Services.ComputerMove;
 using GameEngine.Services.ComputerMove.MoveRules;
+using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using static GameEngine.PlayerEnum;
@@ -32,6 +33,7 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         {
             // Arrange
             IComputerMove classUnderTest = new ComputerMoveHard();
+            var mockFallback = new Mock<IEnumerable<IComputerMove>>();
             var game = new Game();
             var computerPlayer = Player.O;
             var humanPlayer = Player.X;
@@ -39,7 +41,7 @@ namespace UnitTests.GameEngine.Services.ComputerMove
             game.SetPosition(humanPlayer, positionB);
 
             // Act
-            var actual = classUnderTest.SetPosition(computerPlayer, game.GetCurrentBoard());
+            var actual = classUnderTest.SetPosition(computerPlayer, game.GetCurrentBoard(), mockFallback.Object);
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -53,13 +55,14 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         {
             // Arrange
             IComputerMove classUnderTest = new ComputerMoveHard();
+            var mockFallback = new Mock<IEnumerable<IComputerMove>>();
             var game = new Game();
             var computerPlayer = Player.O;
             game.SetPosition(computerPlayer, positionA);
             game.SetPosition(computerPlayer, positionB);
 
             // Act
-            var actual = classUnderTest.SetPosition(computerPlayer, game.GetCurrentBoard());
+            var actual = classUnderTest.SetPosition(computerPlayer, game.GetCurrentBoard(), mockFallback.Object);
 
             // Assert
             Assert.AreEqual(expected, actual);

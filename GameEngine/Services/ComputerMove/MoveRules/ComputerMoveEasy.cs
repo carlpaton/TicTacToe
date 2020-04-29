@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameEngine.Services.ComputerMove.MoveRules
 {
@@ -16,7 +17,7 @@ namespace GameEngine.Services.ComputerMove.MoveRules
         /// <param name="playerComputer"></param>
         /// <param name="board"></param>
         /// <returns></returns>
-        public int SetPosition(PlayerEnum.Player playerComputer, Dictionary<int, string> board)
+        public int SetPosition(PlayerEnum.Player playerComputer, Dictionary<int, string> board, IEnumerable<IComputerMove> fallback)
         {
             for (int i = 1; i <= 9; i++)
             {
@@ -30,7 +31,12 @@ namespace GameEngine.Services.ComputerMove.MoveRules
                     }
                 }
             }
-            throw new Exception("Board SetPosition failed.");
+
+            if (board.Select(x => x.Value == string.Empty).Where(x => x == true).Any())
+                throw new Exception("Board SetPosition failed.");
+            else
+                return (int)GameStatus.GameDraw;
+
         }
     }
 }

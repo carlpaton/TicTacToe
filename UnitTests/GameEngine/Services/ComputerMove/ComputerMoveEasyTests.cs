@@ -1,7 +1,9 @@
 ﻿using GameEngine;
 using GameEngine.Services.ComputerMove;
 using GameEngine.Services.ComputerMove.MoveRules;
+using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
 using static GameEngine.PlayerEnum;
 
 namespace UnitTests.GameEngine.Services.ComputerMove
@@ -30,9 +32,10 @@ namespace UnitTests.GameEngine.Services.ComputerMove
             IComputerMove classUnderTest = new ComputerMoveEasy();
             var game = new Game();
             var player = Player.O;
+            var mockFallback = new Mock<IEnumerable<IComputerMove>>();
 
             // Act
-            var position = classUnderTest.SetPosition(player, game.GetCurrentBoard());
+            var position = classUnderTest.SetPosition(player, game.GetCurrentBoard(), mockFallback.Object);
             var expected = game.GetPositionValue(position);
 
             // Assert

@@ -25,8 +25,13 @@ namespace GameUI.Controllers
         {
             _gameLogService.Reset();
             _gameLogService.Append("Game reset");
-            _game.ResetBoard();
+            _game.ResetBoard();            
             _game.GameOver = false;
+
+            // hack to set the current player to X, which is the human (another hack :D)
+            if (_game.GetCurrentPlayer().Equals("O"))
+                _game.SwapCurrentPlayer();
+
             return RedirectToAction("Index");
         }
 

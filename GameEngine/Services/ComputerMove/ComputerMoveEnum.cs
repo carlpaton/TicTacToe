@@ -6,4 +6,10 @@
         Medium,
         Hard
     }
+
+    public enum GameStatus
+    {
+        GameDraw,
+        GameOver
+    }
 }

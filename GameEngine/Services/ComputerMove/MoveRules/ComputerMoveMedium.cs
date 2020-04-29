@@ -11,7 +11,7 @@ namespace GameEngine.Services.ComputerMove.MoveRules
             return computerLevel == ComputerLevel.Medium;
         }
 
-        public int SetPosition(PlayerEnum.Player playerComputer, Dictionary<int, string> board)
+        public int SetPosition(PlayerEnum.Player playerComputer, Dictionary<int, string> board, IEnumerable<IComputerMove> fallback)
         {
             /* BOARD SQUARES
              * 1, 2, 3
@@ -47,9 +47,11 @@ namespace GameEngine.Services.ComputerMove.MoveRules
                 }              
             }
 
-            // TODO ~ inject the other rules into here and select one on a lower fall back `ComputerLevel`
-
-            throw new Exception("Board SetPosition failed.");
+            // no potential winning rows, fallback to easy
+            return fallback
+                .First(rule => rule
+                .IsMatch(ComputerLevel.Easy))
+                .SetPosition(playerComputer, board, fallback);
         }
     }
 }

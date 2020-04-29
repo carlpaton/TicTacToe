@@ -89,7 +89,7 @@
         $(document).ready(function () {
             $(".item").click(function () {
                 var squareNumber = $(this).attr("data-square");                
-                var elem = $(this);
+                var clickedBlock = $(this);
 
                 var data = JSON.stringify({
                     SquareNumber: squareNumber
@@ -102,14 +102,12 @@
                     contentType: "application/json",
                     success: function (data) {
                         if (data.status === "OK") {
-                            $(elem).text($("#currentPlayer").text());
-                            $("#currentPlayer").text(data.currentPlayer);
-                            $("#currentGameLog").html(data.currentGameLog);
-
-                            var square = ".square" + data.computer.square;
-                            $(square).text(data.computer.player);
+                            processData(data, clickedBlock);
                         } else if (data.status === "GAMEOVER") {
                             alert("Games over mate!\nClick reset to play again.");
+                        } else if (data.status === "GAMEDRAW") {
+                            processData(data, clickedBlock);
+                            alert("Games a draw!\nClick reset to play again.");
                         }
                     },
                     error: error
@@ -123,5 +121,13 @@
             console.log("status=" + status);
         }
 
+        function processData(data, clickedBlock) {
+            console.log("data=" + JSON.stringify(data));
+            $(clickedBlock).text($("#currentPlayer").text());
+            $("#currentPlayer").text(data.currentPlayer);
+            $("#currentGameLog").html(data.currentGameLog);
+            var computerSquare = ".square" + data.computer.square;
+            $(computerSquare).text(data.computer.player);
+        }
     </script>
 }

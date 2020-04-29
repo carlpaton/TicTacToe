@@ -1,6 +1,7 @@
 ﻿using GameEngine;
 using GameEngine.Services.ComputerMove;
 using GameEngine.Services.ComputerMove.MoveRules;
+using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using static GameEngine.PlayerEnum;
@@ -29,12 +30,13 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         {
             // Arrange
             IComputerMove classUnderTest = new ComputerMoveMedium();
+            var mockFallback = new Mock<IEnumerable<IComputerMove>>();
             var game = new Game();
             var player = Player.O;
             var expected = 5; // Only square 5 can make 4 rows
 
             // Act
-            var actual = classUnderTest.SetPosition(player, game.GetCurrentBoard());
+            var actual = classUnderTest.SetPosition(player, game.GetCurrentBoard(), mockFallback.Object);
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -45,6 +47,7 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         {
             // Arrange
             IComputerMove classUnderTest = new ComputerMoveMedium();
+            var mockFallback = new Mock<IEnumerable<IComputerMove>>();
             var game = new Game();
             var player = Player.O;
             game.SetPosition(Player.X, 5); // assume square 5 was already taken (can make 4 rows)
@@ -53,7 +56,7 @@ namespace UnitTests.GameEngine.Services.ComputerMove
             game.SetPosition(Player.X, alreadyPopulatedC);
 
             // Act
-            var actual = classUnderTest.SetPosition(player, game.GetCurrentBoard());
+            var actual = classUnderTest.SetPosition(player, game.GetCurrentBoard(), mockFallback.Object);
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -64,6 +67,7 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         {
             // Arrange
             IComputerMove classUnderTest = new ComputerMoveMedium();
+            var mockFallback = new Mock<IEnumerable<IComputerMove>>();
             var game = new Game();
             var player = Player.O;
             // assume square 5 was already taken (can make 4 rows)
@@ -80,7 +84,7 @@ namespace UnitTests.GameEngine.Services.ComputerMove
             game.SetPosition(Player.X, alreadyPopulatedC);
 
             // Act
-            var actual = classUnderTest.SetPosition(player, game.GetCurrentBoard());
+            var actual = classUnderTest.SetPosition(player, game.GetCurrentBoard(), mockFallback.Object);
 
             // Assert
             Assert.AreEqual(expected, actual);

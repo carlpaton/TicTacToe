@@ -11,7 +11,7 @@ namespace GameEngine.Services.ComputerMove.MoveRules
             return computerLevel == ComputerLevel.Hard;
         }
 
-        public int SetPosition(Player playerComputer, Dictionary<int, string> board)
+        public int SetPosition(Player playerComputer, Dictionary<int, string> board, IEnumerable<IComputerMove> fallback)
         {
             // Determine if there are potential winning rows (For the computer to win)
             // Determine if there are potential winning rows (For the human to win)
@@ -85,10 +85,11 @@ namespace GameEngine.Services.ComputerMove.MoveRules
                 }
             }
 
-            // TODO ~ inject the other rules into here and select one on a lower fall back `ComputerLevel`
-
-            // no potential winning rows found
-            return -1;
+            // no potential winning rows, fallback to medium
+            return fallback
+                .First(rule => rule
+                .IsMatch(ComputerLevel.Medium))
+                .SetPosition(playerComputer, board, fallback);
         }
 
         class PlayersFound 

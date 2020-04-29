@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameEngine.Services.ComputerMove.MoveRules
 {
@@ -32,42 +33,23 @@ namespace GameEngine.Services.ComputerMove.MoveRules
 
             foreach (var highValueSquares in highValueSquareLists)
             {
-                var checkedList = CheckHighValueSquares(highValueSquares, board, playerComputer);
-                if (checkedList != -1) 
+                var randomHighValueSquares = highValueSquares.OrderBy(a => new Random().Next()).ToList();
+                foreach (var square in randomHighValueSquares)
                 {
-                    board[checkedList] = playerComputer.ToString();
-                    return checkedList;
-                }
-            }
-
-            throw new Exception("Board SetPosition failed.");
-        }
-
-        private int CheckHighValueSquares(List<int> highValueSquares, Dictionary<int, string> board, PlayerEnum.Player playerComputer) 
-        {
-            for (int i = 1; i <= highValueSquares.Count; i++)
-            {
-                var random = new Random().Next(i, highValueSquares.Count);
-                var randomTranslated = RandomTranslated(random, highValueSquares);
-                if (board.TryGetValue(randomTranslated, out string squareValue))
-                {
-                    if (squareValue.Equals(string.Empty))
+                    if (board.TryGetValue(square, out string squareValue)) 
                     {
-                        board[randomTranslated] = playerComputer.ToString();
-                        return randomTranslated;
+                        if (squareValue.Equals(string.Empty))
+                        {
+                            board[square] = playerComputer.ToString();
+                            return square;
+                        }
                     }
-                }
+                }              
             }
 
             // TODO ~ inject the other rules into here and select one on a lower fall back `ComputerLevel`
 
-            return -1;
-        }
-
-        private int RandomTranslated(int random, List<int> actualSquares)
-        {
-            var zeroBased = random - 1;
-            return actualSquares[zeroBased];
+            throw new Exception("Board SetPosition failed.");
         }
     }
 }

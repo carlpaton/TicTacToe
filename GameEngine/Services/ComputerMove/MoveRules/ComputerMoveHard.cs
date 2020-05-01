@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Linq;
 using static GameEngine.PlayerEnum;
 
@@ -6,13 +7,20 @@ namespace GameEngine.Services.ComputerMove.MoveRules
 {
     public class ComputerMoveHard : IComputerMove
     {
+        private readonly ILogger<ComputerMoveHard> _logger;
+
+        public ComputerMoveHard(ILogger<ComputerMoveHard> logger) 
+        {
+            _logger = logger;
+        }
+
         public bool IsMatch(ComputerLevel computerLevel)
         {
             return computerLevel == ComputerLevel.Hard;
         }
 
         public int SetPosition(Player playerComputer, Dictionary<int, string> board, IEnumerable<IComputerMove> fallback)
-        {
+        {           
             // Determine if there are potential winning rows (For the computer to win)
             // Determine if there are potential winning rows (For the human to win)
 
@@ -79,6 +87,7 @@ namespace GameEngine.Services.ComputerMove.MoveRules
                             var openSpace = list[0];
                             board[openSpace] = playerComputer.ToString();
 
+                            _logger.LogTrace($"Square={openSpace}");
                             return openSpace; 
                         }
                     }        

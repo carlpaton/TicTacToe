@@ -5,9 +5,7 @@ VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameEngine", "GameEngine\GameEngine.csproj", "{79B62BEC-4DA1-4DCE-94E3-61C23C4AD84D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{AAC0F8CD-728F-42A3-A7CE-021AE5C0ABDB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameUI", "GameUI\GameUI.csproj", "{0A52EEAA-484B-47B5-85AD-333C16CF8DF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameUI", "GameUI\GameUI.csproj", "{0A52EEAA-484B-47B5-85AD-333C16CF8DF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{79B62BEC-4DA1-4DCE-94E3-61C23C4AD84D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79B62BEC-4DA1-4DCE-94E3-61C23C4AD84D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79B62BEC-4DA1-4DCE-94E3-61C23C4AD84D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAC0F8CD-728F-42A3-A7CE-021AE5C0ABDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAC0F8CD-728F-42A3-A7CE-021AE5C0ABDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAC0F8CD-728F-42A3-A7CE-021AE5C0ABDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAC0F8CD-728F-42A3-A7CE-021AE5C0ABDB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0A52EEAA-484B-47B5-85AD-333C16CF8DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0A52EEAA-484B-47B5-85AD-333C16CF8DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A52EEAA-484B-47B5-85AD-333C16CF8DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU

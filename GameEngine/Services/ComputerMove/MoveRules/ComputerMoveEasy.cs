@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +7,13 @@ namespace GameEngine.Services.ComputerMove.MoveRules
 {
     public class ComputerMoveEasy : IComputerMove
     {
+        private readonly ILogger<ComputerMoveEasy> _logger;
+
+        public ComputerMoveEasy(ILogger<ComputerMoveEasy> logger)
+        {
+            _logger = logger;
+        }
+
         public bool IsMatch(ComputerLevel computerLevel)
         {
             return computerLevel == ComputerLevel.Easy;
@@ -27,6 +35,7 @@ namespace GameEngine.Services.ComputerMove.MoveRules
                     if (s.Equals(string.Empty))
                     {
                         board[random] = playerComputer.ToString();
+                        _logger.LogTrace($"Square={random}");
                         return random;
                     }
                 }

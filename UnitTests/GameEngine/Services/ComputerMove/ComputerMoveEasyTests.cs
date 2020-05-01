@@ -5,6 +5,7 @@ using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using static GameEngine.PlayerEnum;
+using Microsoft.Extensions.Logging;
 
 namespace UnitTests.GameEngine.Services.ComputerMove
 {
@@ -16,7 +17,8 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         public void IsMatch_GivenComputerLevel_MatchesGivenExpected(ComputerLevel computerLevel, bool expected)
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveEasy();
+            var mockLogger = new Mock<ILogger<ComputerMoveEasy>>();
+            IComputerMove classUnderTest = new ComputerMoveEasy(mockLogger.Object);
 
             // Act
             var actual = classUnderTest.IsMatch(computerLevel);
@@ -29,7 +31,8 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         public void SetPosition_GivenValidDataAndTheBoardHasOpenSquares_SetsBoardPosition()
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveEasy();
+            var mockLogger = new Mock<ILogger<ComputerMoveEasy>>();
+            IComputerMove classUnderTest = new ComputerMoveEasy(mockLogger.Object);
             var game = new Game();
             var player = Player.O;
             var mockFallback = new Mock<IEnumerable<IComputerMove>>();

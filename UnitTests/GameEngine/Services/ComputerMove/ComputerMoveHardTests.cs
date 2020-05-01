@@ -1,6 +1,7 @@
 ﻿using GameEngine;
 using GameEngine.Services.ComputerMove;
 using GameEngine.Services.ComputerMove.MoveRules;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         public void IsMatch_GivenComputerLevel_MatchesGivenExpected(ComputerLevel computerLevel, bool expected)
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveHard();
+            var mockLogger = new Mock<ILogger<ComputerMoveHard>>();
+            IComputerMove classUnderTest = new ComputerMoveHard(mockLogger.Object);
 
             // Act
             var actual = classUnderTest.IsMatch(computerLevel);
@@ -32,7 +34,8 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         public void SetPosition_WhenTwoSquaresAreSetByTheHuman_TheComputerBlocksTheThird(int expected, int positionA, int positionB)
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveHard();
+            var mockLogger = new Mock<ILogger<ComputerMoveHard>>();
+            IComputerMove classUnderTest = new ComputerMoveHard(mockLogger.Object);
             var mockFallback = new Mock<IEnumerable<IComputerMove>>();
             var game = new Game();
             var computerPlayer = Player.O;
@@ -54,7 +57,8 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         public void SetPosition_WhenTwoSquaresAreSetByTheComputer_TheComputerTakesTheThird(int expected, int positionA, int positionB)
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveHard();
+            var mockLogger = new Mock<ILogger<ComputerMoveHard>>();
+            IComputerMove classUnderTest = new ComputerMoveHard(mockLogger.Object);
             var mockFallback = new Mock<IEnumerable<IComputerMove>>();
             var game = new Game();
             var computerPlayer = Player.O;

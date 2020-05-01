@@ -1,6 +1,7 @@
 ﻿using GameEngine;
 using GameEngine.Services.ComputerMove;
 using GameEngine.Services.ComputerMove.MoveRules;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         public void IsMatch_GivenComputerLevel_MatchesGivenExpected(ComputerLevel computerLevel, bool expected)
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveMedium();
+            var mockLogger = new Mock<ILogger<ComputerMoveMedium>>();
+            IComputerMove classUnderTest = new ComputerMoveMedium(mockLogger.Object);
 
             // Act
             var actual = classUnderTest.IsMatch(computerLevel);
@@ -29,7 +31,8 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         public void SetPosition_WhenHighValueSquareIsAvalibleThatCanMake4Rows_ThisSquareIsUsed()
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveMedium();
+            var mockLogger = new Mock<ILogger<ComputerMoveMedium>>();
+            IComputerMove classUnderTest = new ComputerMoveMedium(mockLogger.Object);
             var mockFallback = new Mock<IEnumerable<IComputerMove>>();
             var game = new Game();
             var player = Player.O;
@@ -46,7 +49,8 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         public void SetPosition_WhenHighValueSquareIsAvalibleThatCanMake3Rows_ThisSquareIsUsed(int expected, int alreadyPopulatedA, int alreadyPopulatedB, int alreadyPopulatedC)
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveMedium();
+            var mockLogger = new Mock<ILogger<ComputerMoveMedium>>();
+            IComputerMove classUnderTest = new ComputerMoveMedium(mockLogger.Object);
             var mockFallback = new Mock<IEnumerable<IComputerMove>>();
             var game = new Game();
             var player = Player.O;
@@ -66,7 +70,8 @@ namespace UnitTests.GameEngine.Services.ComputerMove
         public void SetPosition_WhenHighValueSquareIsAvalibleThatCanMake2Rows_ThisSquareIsUsed(int expected, int alreadyPopulatedA, int alreadyPopulatedB, int alreadyPopulatedC)
         {
             // Arrange
-            IComputerMove classUnderTest = new ComputerMoveMedium();
+            var mockLogger = new Mock<ILogger<ComputerMoveMedium>>();
+            IComputerMove classUnderTest = new ComputerMoveMedium(mockLogger.Object);
             var mockFallback = new Mock<IEnumerable<IComputerMove>>();
             var game = new Game();
             var player = Player.O;
